@@ -7,19 +7,19 @@
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- 1.先配置那个服务要发布 ，bean标签配置-->
+    <!-- 1.先配置哪个服务要发布 ，bean标签配置：为自己的实现类，需要发布的-->
     <bean id="orderService" class="com.lnsoft.OrderServiceImpl">
     </bean>
 
     <!-- 2.配置服务的名字 -->
     <dubbo:application name="orderServiceProvider"></dubbo:application>
 
-    <!-- 3.配置服务的地址 -->
+    <!-- 3.配置发布服务的地址 -->
     <!-- backup前面的是leader主，后面的是follower从 -->
     <!-- linux：有主从 -->
-    <dubbo:registry address="zookeeper://192.168.92.130:2181?backup=192.168.92.129:2181,192.168.92.128:2181"></dubbo:registry>
+   <!-- <dubbo:registry address="zookeeper://192.168.92.130:2181?backup=192.168.92.129:2181,192.168.92.128:2181"></dubbo:registry>-->
     <!-- 本地localhost -->
-    <!--<dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
     <!-- 130单独测试 -->
     <!--<dubbo:registry address="zookeeper://192.168.92.130:2181"></dubbo:registry>-->
     <!-- 129单独测试 -->
@@ -28,10 +28,12 @@
     <!--<dubbo:registry address="zookeeper://192.168.92.128:2181"></dubbo:registry>-->
 
 
-    <!-- 4.配置服务端口 -->
+    <!-- 4.配置发布服务端口 -->
     <dubbo:protocol port="20881"></dubbo:protocol>
 
-    <!-- 5.对外暴露的接口:interface为暴露的接口，ref为关联的服务 -->
+    <!-- 5.提供者对外暴露的接口:interface为暴露的接口，ref为关联的服务
+        对外提供的接口为公共的common的接口，但是使用的是自己的impl实现类
+     -->
     <dubbo:service interface="com.lnsoft.service.OrderService" ref="orderService"></dubbo:service>
 
 </beans>

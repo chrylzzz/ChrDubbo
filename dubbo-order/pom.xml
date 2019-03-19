@@ -13,7 +13,7 @@
     <artifactId>dubbo-order</artifactId>
 
 
-<!-- 依赖common -->
+    <!-- 依赖common -->
     <dependencies>
         <dependency>
             <!-- 这是以来的artifactid -->
