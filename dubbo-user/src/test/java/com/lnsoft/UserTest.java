@@ -4,10 +4,10 @@ import com.lnsoft.model.Order;
 import com.lnsoft.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,13 +18,13 @@ import java.util.List;
 public class UserTest {
 
     //服务注册进来
-    @Autowired
+    @Resource
     private OrderService orderService;
 
 
     @Test
     public void show(){
         List<Order> orderList = orderService.queryOrder();
-        System.out.println(orderList);
+        System.out.println("dubbo:     "+orderList);
     }
 }
